@@ -1,0 +1,38 @@
+.input-field {
+    width: 100%;
+    border: 1px solid #d1d5db; /* Tailwind border-gray-300 */
+    border-radius: 0.5rem; /* Tailwind rounded-lg */
+    padding: 0.5rem; /* Tailwind p-2 */
+    outline: none;
+    transition: box-shadow 0.2s;
+}
+.input-field:focus {
+    box-shadow: 0 0 0 2px #4ade80; /* Tailwind focus:ring-green-400 */
+}
+.btn-primary {
+    background-color: #16a34a; /* Tailwind bg-green-600 */
+    color: #fff; /* Tailwind text-white */
+    padding-left: 1rem; /* Tailwind px-4 */
+    padding-right: 1rem; /* Tailwind px-4 */
+    padding-top: 0.5rem; /* Tailwind py-2 */
+    padding-bottom: 0.5rem; /* Tailwind py-2 */
+    border-radius: 0.5rem; /* Tailwind rounded-lg */
+    transition: background-color 0.2s;
+}
+.btn-primary:hover {
+    background-color: #15803d; /* Tailwind hover:bg-green-700 */
+}
+.blockchain-block {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: perspective(1000px) rotateX(5deg);
+    transition: all 0.3s ease;
+}
+.blockchain-block:hover {
+    transform: perspective(1000px) rotateX(0deg) scale(1.02);
+}
+.timeline-line {
+    background: linear-gradient(to bottom, #10b981, #3b82f6, #8b5cf6, #f59e0b);
+}
+.qr-code {
+    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 20px 20px;
+}

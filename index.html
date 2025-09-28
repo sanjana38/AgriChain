@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agricultural Supply Chain</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🌾</span>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-800">AgriChain</h1>
+                </div>
+                <nav class="flex space-x-6">
+                    <button onclick="showSection('farmer')" class="nav-btn text-green-600 font-semibold">Farmer</button>
+                    <button onclick="showSection('dealer-section')" class="nav-btn text-blue-600 font-semibold">Dealer</button>
+                    <button onclick="showSection('retailer-section')" class="nav-btn text-purple-600 font-semibold">Retailer</button>
+                    <button onclick="showSection('consumer-section')" class="nav-btn text-orange-600 font-semibold">Consumer</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Farmer Section -->
+        <section id="farmer-section" class="section-content">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🚜</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Farmer Registration</h2>
+                    <p class="text-gray-600 mt-2">Start your product's blockchain journey</p>
+                </div>
+
+                <form id="farmer-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Farmer Name</label>
+                            <input type="text" id="farmer-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Farm Location</label>
+                            <input type="text" id="farm-location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Product Type</label>
+                            <select id="product-type" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option value="">Select Product</option>
+                                <option value="wheat">Wheat</option>
+                                <option value="rice">Rice</option>
+                                <option value="corn">Corn</option>
+                                <option value="tomatoes">Tomatoes</option>
+                                <option value="potatoes">Potatoes</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Quantity (kg)</label>
+                            <input type="number" id="quantity" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Base Price (₹/kg)</label>
+                            <input type="number" id="base-price" step="0.01" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Harvest Date</label>
+                            <input type="date" id="harvest-date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-green-600 text-white py-4 rounded-lg font-semibold hover:bg-green-700 transition duration-200">
+                        🔗 Create Blockchain Entry & Generate QR
+                    </button>
+                </form>
+
+                <div id="farmer-result" class="hidden mt-8 p-6 bg-green-50 rounded-lg border border-green-200">
+                    <h3 class="text-lg font-semibold text-green-800 mb-4">✅ Product Registered Successfully!</h3>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-600">Product ID:</p>
+                            <p id="product-id" class="font-mono text-lg font-bold text-green-700"></p>
+                        </div>
+                        <div class="qr-code w-24 h-24 rounded-lg border-2 border-green-300 flex items-center justify-center">
+                            <span class="text-xs font-bold">QR CODE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dealer Section -->
+      <section id="dealer-section" class="section-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🚛</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Dealer Processing</h2>
+                    <p class="text-gray-600 mt-2">Add your charges to the supply chain</p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Scan QR or Enter Product ID</label>
+                    <div class="flex space-x-3">
+                        <input type="text" id="dealer-product-id" placeholder="Enter Product ID" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button onclick="fetchProductForDealer()" class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200">
+                            📱 Scan
+                        </button>
+                    </div>
+                </div>
+
+                <div id="dealer-product-info" class="hidden mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="font-semibold text-blue-800 mb-2">Product Information</h3>
+                    <div id="dealer-product-details"></div>
+                </div>
+
+                <form id="dealer-form" class="space-y-6 hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Dealer Name</label>
+                            <input type="text" id="dealer-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Processing Location</label>
+                            <input type="text" id="dealer-location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Transportation Cost (₹)</label>
+                            <input type="number" id="transport-cost" step="0.01" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Processing Fee (₹)</label>
+                            <input type="number" id="processing-fee" step="0.01" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Storage Cost (₹)</label>
+                            <input type="number" id="storage-cost" step="0.01" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Processing Date</label>
+                            <input type="date" id="processing-date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-blue-600 text-white py-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+                        🔗 Add to Blockchain
+                    </button>
+                </form>
+
+                <div id="dealer-result" class="hidden mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+                    <h3 class="text-lg font-semibold text-blue-800">✅ Dealer charges added to blockchain!</h3>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Retailer Section -->
+ <section id="retailer-section" class="section-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">🏪</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Retailer Margin</h2>
+                    <p class="text-gray-600 mt-2">Add final retail markup</p>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Scan QR or Enter Product ID</label>
+                    <div class="flex space-x-3">
+                        <input type="text" id="retailer-product-id" placeholder="Enter Product ID" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <button onclick="fetchProductForRetailer()" class="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition duration-200">
+                            📱 Scan
+                        </button>
+                    </div>
+                </div>
+
+                <div id="retailer-product-info" class="hidden mb-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                    <h3 class="font-semibold text-purple-800 mb-2">Product Information</h3>
+                    <div id="retailer-product-details"></div>
+                </div>
+
+                <form id="retailer-form" class="space-y-6 hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Retailer Name</label>
+                            <input type="text" id="retailer-name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Store Location</label>
+                            <input type="text" id="store-location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Retail Margin (%)</label>
+                            <input type="number" id="retail-margin" step="0.1" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Shelf Date</label>
+                            <input type="date" id="shelf-date" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-lg font-semibold hover:bg-purple-700 transition duration-200">
+                        🔗 Add Final Markup to Blockchain
+                    </button>
+                </form>
+
+                <div id="retailer-result" class="hidden mt-8 p-6 bg-purple-50 rounded-lg border border-purple-200">
+                    <h3 class="text-lg font-semibold text-purple-800">✅ Retail margin added to blockchain!</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consumer Section -->
+         <section id="consumer-section" class="section-content hidden">
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-3xl">👥</span>
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-800">Consumer Transparency</h2>
+                    <p class="text-gray-600 mt-2">Track your product's complete journey</p>
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Scan QR Code or Enter Product ID</label>
+                    <div class="flex space-x-3">
+                        <input type="text" id="consumer-product-id" placeholder="Enter Product ID to track" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                        <button onclick="trackProduct()" class="px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition duration-200">
+                            🔍 Track Product
+                        </button>
+                    </div>
+                </div>
+
+                <div id="product-timeline" class="hidden">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">🔗 Blockchain Journey</h3>
+                    <div id="timeline-content" class="space-y-6"></div>
+                    
+                    <div id="price-breakdown" class="mt-8 p-6 bg-gradient-to-r from-green-50 to-orange-50 rounded-xl border border-gray-200">
+                        <h4 class="text-xl font-bold text-gray-800 mb-4 text-center">💰 Price Breakdown</h4>
+                        <div id="price-details" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                    </div>
+                </div>
+
+                <div id="no-product-found" class="hidden text-center py-8">
+                    <div class="text-6xl mb-4">❌</div>
+                    <h3 class="text-xl font-semibold text-gray-600">Product not found</h3>
+                    <p class="text-gray-500 mt-2">Please check the Product ID and try again</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/blockchain.js"></script>
+    <script src="assets/js/dealer.js"></script>
+    <script src="assets/js/retailer.js"></script>
+    <script src="assets/js/consumer.js"></script>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll("main section").forEach(sec => sec.classList.add("hidden"));
+            document.getElementById(sectionId).classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>
